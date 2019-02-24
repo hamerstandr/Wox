@@ -74,7 +74,7 @@ namespace Wox.Plugin.Color
         {
             // todo: rgb, names
             var length = query.Length - 1; // minus `#` sign
-            return query.StartsWith("#") && (length == 3 || length == 6);
+            return query.StartsWith("#") && (length == 3 || length == 6 || length == 8);
         }
 
         public FileInfo[] Find(string name)
