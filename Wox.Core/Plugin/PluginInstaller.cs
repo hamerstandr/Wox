@@ -111,9 +111,7 @@ namespace Wox.Core.Plugin
             {
                 string error = $"Parse plugin config {configPath} failed: json format is not valid";
 #if (DEBUG)
-                {
-                    throw new Exception(error);
-                }
+                throw new Exception(error);
 #endif
                 return null;
             }

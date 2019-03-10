@@ -14,7 +14,8 @@ using Wox.Infrastructure.Logger;
 using Wox.Infrastructure.UserSettings;
 using Wox.ViewModel;
 using Stopwatch = Wox.Infrastructure.Stopwatch;
-
+//build event
+//powershell.exe -NoProfile -File $(SolutionDir)Scripts\post_build.ps1 $(ConfigurationName) $(SolutionDir)
 namespace Wox
 {
     public partial class App : IDisposable, ISingleInstanceApp

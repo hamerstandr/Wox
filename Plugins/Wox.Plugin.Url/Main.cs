@@ -90,7 +90,7 @@ namespace Wox.Plugin.Url
 
                                 return true;
                             }
-                            catch(Exception ex)
+                            catch//(Exception ex)
                             {
                                 context.API.ShowMsg(string.Format(context.API.GetTranslation("wox_plugin_url_canot_open_url"), raw));
                                 return false;
