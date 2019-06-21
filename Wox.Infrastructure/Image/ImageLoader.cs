@@ -45,6 +45,7 @@ namespace Wox.Infrastructure.Image
                 {
                     ImageCache.Usage.AsParallel().Where(i => !ImageCache.ContainsKey(i.Key)).ForAll(i =>
                     {
+                        ;
                         var img = Load(i.Key);
                         if (img != null)
                         {
@@ -64,6 +65,7 @@ namespace Wox.Infrastructure.Image
         
         public static ImageSource Load(string path, bool loadFullImage = false)
         {
+            
             ImageSource image;
             try
             {

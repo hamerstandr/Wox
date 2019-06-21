@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace Wox.Infrastructure.Image
 {
@@ -104,13 +105,13 @@ namespace Wox.Infrastructure.Image
         };
 
 
-        public static BitmapSource GetThumbnail(string fileName, int width, int height, ThumbnailOptions options)
+        public static  BitmapSource GetThumbnail(string fileName, int width, int height, ThumbnailOptions options)
         {
             IntPtr hBitmap = GetHBitmap(Path.GetFullPath(fileName), width, height, options);
 
             try
             {
-
+                //
                 return Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             }
             finally
