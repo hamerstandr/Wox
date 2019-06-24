@@ -1,0 +1,12 @@
+{
+  "ID": "DFB10E1E7E3B4085823D60DC76F28844",
+  "ActionKeyword": "pw",
+  "Name": "Random Password Generator",
+  "Description": "A simple arbitrary length password generator.",
+  "Author": "hamerstandr",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "https://github.com/Wox-launcher/Wox",
+  "ExecuteFileName": "Wox.Plugin.Random.Password.Generator.dll",
+  "IcoPath": "Images\\app.png"
+}
