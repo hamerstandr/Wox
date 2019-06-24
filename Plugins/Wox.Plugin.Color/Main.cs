@@ -10,7 +10,7 @@ namespace Wox.Plugin.Color
 {
     public sealed class ColorsPlugin : IPlugin, IPluginI18n
     {
-        private string DIR_PATH = Path.Combine(Path.GetTempPath(), @"Plugins\Colors\");
+        private readonly string DIR_PATH = Path.Combine(Path.GetTempPath(), @"Plugins\Colors\");
         private PluginInitContext context;
         private const int IMG_SIZE = 32;
 
