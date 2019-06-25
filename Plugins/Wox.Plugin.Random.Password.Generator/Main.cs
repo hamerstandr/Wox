@@ -19,6 +19,7 @@ namespace Wox.Plugin.Random.Password.Generator
             string[] args = query.Search.Split(' ');
             int number = 1;
             int length = 0;
+            Capsloock = 0;
             switch (args[0])
             {
                 case "l":
