@@ -290,6 +290,21 @@ namespace Wox.Plugin.Shell
                     return false;
                 }
             }
+            else if (_settings.ReplaceWinQ)
+            {
+                if (keyevent == (int)KeyEvent.WM_KEYDOWN && vkcode == (int)Keys.Q && state.WinPressed)
+                {
+                    _winRStroked = true;
+                    OnWinRPressed();
+                    return false;
+                }
+                if (keyevent == (int)KeyEvent.WM_KEYUP && _winRStroked && vkcode == (int)Keys.LWin)
+                {
+                    _winRStroked = false;
+                    _keyboardSimulator.ModifiedKeyStroke(VirtualKeyCode.LWIN, VirtualKeyCode.CONTROL);
+                    return false;
+                }
+            }
             return true;
         }
 

@@ -16,6 +16,7 @@ namespace Wox.Plugin.Shell
         private void CMDSetting_OnLoaded(object sender, RoutedEventArgs re)
         {
             ReplaceWinR.IsChecked = _settings.ReplaceWinR;
+            ReplaceWinQ.IsChecked = _settings.ReplaceWinQ;
             LeaveShellOpen.IsChecked = _settings.LeaveShellOpen;
             LeaveShellOpen.IsEnabled = _settings.Shell != Shell.RunCommand;
 
@@ -32,12 +33,24 @@ namespace Wox.Plugin.Shell
             ReplaceWinR.Checked += (o, e) =>
             {
                 _settings.ReplaceWinR = true;
+                _settings.ReplaceWinQ = false;
+                ReplaceWinQ.IsChecked = false;
             };
             ReplaceWinR.Unchecked += (o, e) =>
             {
                 _settings.ReplaceWinR = false;
             };
 
+            ReplaceWinQ.Checked += (o, e) =>
+            {
+                _settings.ReplaceWinQ = true;
+                _settings.ReplaceWinR = false;
+                ReplaceWinR.IsChecked = false;
+            };
+            ReplaceWinQ.Unchecked += (o, e) =>
+            {
+                _settings.ReplaceWinQ = false;
+            };
             ShellComboBox.SelectedIndex = (int) _settings.Shell;
             ShellComboBox.SelectionChanged += (o, e) =>
             {
