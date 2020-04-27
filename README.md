@@ -1,3 +1,8 @@
+**New**
+* Fix Wox Plugin Color
+* Add Random Password Generator
+* Add ColorPicker
+
 WoX
 ===
 
