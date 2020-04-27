@@ -16,8 +16,8 @@ namespace Wox.Plugin.Shell
         private void CMDSetting_OnLoaded(object sender, RoutedEventArgs re)
         {
             ReplaceWinR.IsChecked = _settings.ReplaceWinR;
-            ReplaceWinQ.IsChecked = _settings.ReplaceWinQ;
             LeaveShellOpen.IsChecked = _settings.LeaveShellOpen;
+            AlwaysRunAsAdministrator.IsChecked = _settings.RunAsAdministrator;
             LeaveShellOpen.IsEnabled = _settings.Shell != Shell.RunCommand;
 
             LeaveShellOpen.Checked += (o, e) =>
@@ -30,28 +30,30 @@ namespace Wox.Plugin.Shell
                 _settings.LeaveShellOpen = false;
             };
 
+            AlwaysRunAsAdministrator.Checked += (o, e) =>
+            {
+                _settings.RunAsAdministrator = true;
+            };
+
+            AlwaysRunAsAdministrator.Unchecked += (o, e) =>
+            {
+                _settings.RunAsAdministrator = false;
+            };
+
             ReplaceWinR.Checked += (o, e) =>
             {
                 _settings.ReplaceWinR = true;
-                _settings.ReplaceWinQ = false;
-                ReplaceWinQ.IsChecked = false;
             };
             ReplaceWinR.Unchecked += (o, e) =>
             {
                 _settings.ReplaceWinR = false;
             };
 
-            ReplaceWinQ.Checked += (o, e) =>
-            {
-                _settings.ReplaceWinQ = true;
-                _settings.ReplaceWinR = false;
-                ReplaceWinR.IsChecked = false;
-            };
-            ReplaceWinQ.Unchecked += (o, e) =>
-            {
-                _settings.ReplaceWinQ = false;
-            };
             ShellComboBox.SelectedIndex = (int) _settings.Shell;
+            if (_settings.SupportWSL)
+            {
+                ShellComboBox.Items.Add("Bash");
+            }
             ShellComboBox.SelectionChanged += (o, e) =>
             {
                 _settings.Shell = (Shell) ShellComboBox.SelectedIndex;

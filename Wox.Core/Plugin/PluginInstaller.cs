@@ -34,7 +34,7 @@ namespace Wox.Core.Plugin
                     return;
                 }
 
-                string pluginFolerPath = Infrastructure.Constant.PluginsDirectory;
+                string pluginFolerPath = Infrastructure.UserSettings.DataLocation.PluginsDirectory;
 
                 string newPluginName = plugin.Name
                     .Replace("/", "_")
@@ -111,9 +111,11 @@ namespace Wox.Core.Plugin
             {
                 string error = $"Parse plugin config {configPath} failed: json format is not valid";
 #if (DEBUG)
-                throw new Exception(error);
+                {
+                    throw new Exception(error);
+                }
+
 #endif
-                return null;
             }
 
 
@@ -124,8 +126,8 @@ namespace Wox.Core.Plugin
                 {
                     throw new Exception(error);
                 }
+
 #endif
-                return null;
             }
             if (!File.Exists(metadata.ExecuteFilePath))
             {
@@ -134,8 +136,8 @@ namespace Wox.Core.Plugin
                 {
                     throw new Exception(error);
                 }
+
 #endif
-                return null;
             }
 
             return metadata;

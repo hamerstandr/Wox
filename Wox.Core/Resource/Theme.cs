@@ -23,7 +23,7 @@ namespace Wox.Core.Resource
         private const string Folder = "Themes";
         private const string Extension = ".xaml";
         private string DirectoryPath => Path.Combine(Constant.ProgramDirectory, Folder);
-        private string UserDirectoryPath => Path.Combine(Constant.DataDirectory, Folder);
+        private string UserDirectoryPath => Path.Combine(DataLocation.DataDirectory(), Folder);
 
         public Theme()
         {
@@ -89,6 +89,7 @@ namespace Wox.Core.Resource
             catch (DirectoryNotFoundException e)
             {
                 Log.Error($"|Theme.ChangeTheme|Theme <{theme}> path can't be found");
+                Log.Error(e.Message);
                 if (theme != defaultTheme)
                 {
                     MessageBox.Show(string.Format(InternationalizationManager.Instance.GetTranslation("theme_load_failure_path_not_exists"), theme));
@@ -99,6 +100,7 @@ namespace Wox.Core.Resource
             catch (XamlParseException e)
             {
                 Log.Error($"|Theme.ChangeTheme|Theme <{theme}> fail to parse");
+                Log.Error(e.Message);
                 if (theme != defaultTheme)
                 {
                     MessageBox.Show(string.Format(InternationalizationManager.Instance.GetTranslation("theme_load_failure_parse_error"), theme));
@@ -124,6 +126,12 @@ namespace Wox.Core.Resource
                 queryBoxStyle.Setters.Add(new Setter(TextBox.FontStyleProperty, FontHelper.GetFontStyleFromInvariantStringOrNormal(Settings.QueryBoxFontStyle)));
                 queryBoxStyle.Setters.Add(new Setter(TextBox.FontWeightProperty, FontHelper.GetFontWeightFromInvariantStringOrNormal(Settings.QueryBoxFontWeight)));
                 queryBoxStyle.Setters.Add(new Setter(TextBox.FontStretchProperty, FontHelper.GetFontStretchFromInvariantStringOrNormal(Settings.QueryBoxFontStretch)));
+
+                var caretBrushPropertyValue = queryBoxStyle.Setters.OfType<Setter>().Any(x => x.Property.Name == "CaretBrush");
+                var foregroundPropertyValue = queryBoxStyle.Setters.OfType<Setter>().Where(x => x.Property.Name == "Foreground")
+                    .Select(x => x.Value).FirstOrDefault();
+                if (!caretBrushPropertyValue && foregroundPropertyValue != null) //otherwise BaseQueryBoxStyle will handle styling
+                    queryBoxStyle.Setters.Add(new Setter(TextBox.CaretBrushProperty, foregroundPropertyValue));
             }
 
             Style resultItemStyle = dict["ItemTitleStyle"] as Style;

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("ColorPicker")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("hamerstandr")]
 [assembly: AssemblyCompany("hamerstandr@gmil.com")]
 [assembly: AssemblyProduct("ColorPicker")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]

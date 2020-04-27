@@ -9,7 +9,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         x:Class="Wox.SettingWindow"
         mc:Ignorable="d"
-        Icon="Images\app2.png"
+        Icon="Images\app.png"
         Title="{DynamicResource wox_settings}"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -33,7 +33,11 @@
     <TabControl Height="auto" SelectedIndex="0">
         <TabItem Header="{DynamicResource general}">
             <StackPanel Orientation="Vertical">
-                <CheckBox IsChecked="{Binding Settings.StartWoxOnSystemStartup}" Margin="10">
+                <CheckBox Margin="10" IsChecked="{Binding PortableMode}">
+                    <TextBlock Text="Portable Mode" />
+                </CheckBox>
+                <CheckBox Margin="10" IsChecked="{Binding Settings.StartWoxOnSystemStartup}"
+                          Checked="OnAutoStartupChecked" Unchecked="OnAutoStartupUncheck">
                     <TextBlock Text="{DynamicResource startWoxOnSystemStartup}" />
                 </CheckBox>
                 <CheckBox Margin="10" IsChecked="{Binding Settings.HideOnStartup}">
@@ -51,10 +55,18 @@
                 <CheckBox Margin="10" IsChecked="{Binding Settings.IgnoreHotkeysOnFullscreen}">
                     <TextBlock Text="{DynamicResource ignoreHotkeysOnFullscreen}" />
                 </CheckBox>
-                <CheckBox Margin="10" IsChecked="{Binding Settings.AutoUpdates}"
-                          Checked="OnAutoStartupChecked" Unchecked="OnAutoStartupUncheck">
+                <CheckBox Margin="10" IsChecked="{Binding Settings.AutoUpdates}">
                     <TextBlock Text="{DynamicResource autoUpdates}" />
                 </CheckBox>
+                <CheckBox Margin="10" IsChecked="{Binding ShouldUsePinyin}">
+                    <TextBlock Text="{DynamicResource ShouldUsePinyin}" />
+                </CheckBox>
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource querySearchPrecision}" />
+                    <ComboBox Margin="10 0 0 0" Width="120"
+                              ItemsSource="{Binding QuerySearchPrecisionStrings}" 
+                              SelectedItem="{Binding Settings.QuerySearchPrecisionString}" />
+                </StackPanel>
                 <StackPanel Margin="10" Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource lastQueryMode}" />
                     <ComboBox Margin="10 0 0 0" Width="120"
@@ -63,8 +75,8 @@
                 </StackPanel>
                 <StackPanel Margin="10" Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource language}" />
-                    <ComboBox Margin="10 0 0 0" Width="120" SelectionChanged="OnLanguageChanged"
-                              ItemsSource="{Binding Languages}" SelectedValue="{Binding Settings.Language}"
+                    <ComboBox Margin="10 0 0 0" Width="120"
+                              ItemsSource="{Binding Languages}" SelectedValue="{Binding Language}"
                               DisplayMemberPath="Display" SelectedValuePath="LanguageCode" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10">
@@ -375,7 +387,7 @@
                         <Run Text="{Binding Github, Mode=OneWay}" />
                     </Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="{DynamicResource version}" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Version" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Version}" />
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="{DynamicResource releaseNotes}" />
                 <TextBlock Grid.Row="3" Grid.Column="1">
