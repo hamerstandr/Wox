@@ -1,0 +1,12 @@
+{
+    "ID":"9fffCf6181FC47FBB597AA2C29CD9B0A",
+    "ActionKeyword":"*",
+    "Name":"Color_subtitle",
+    "Description":"Provide hex color preview.(Try &000000000 in Wox)",
+    "Author":"hamerstandr",
+    "Version":"1.0.0",
+    "Language":"csharp",
+    "Website":"https://github.com/Wox-launcher/Wox",
+    "ExecuteFileName":"Wox.Plugin.Color_subtitle.dll",
+    "IcoPath":"Images\\color.png"
+}
